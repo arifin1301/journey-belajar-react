@@ -13,14 +13,43 @@
     <div id="root"></div>
     <script type="text/babel">
     
-    function Header() {
-      return (
-        <h1>Dion Ganteng</h1>
-      )
-    }
+      function Header({name}) {
+        return (
+          <h1>Hi, my name is {name ? name: 'Arifin'}</h1>
+        )
+      }
 
       function HomePage() {
-        return(<Header />);
+        const hobbys = ['reading', 'coding', 'sleeping'];
+        const [likes, setLike] = React.useState(0);
+
+        function handleClickPlus() {
+          setLike(likes + 1);
+        }
+
+        function handleClickMin() {
+          setLike(likes - 1);
+        }
+        function handleClickReset() {
+          setLike(likes - likes);
+        }
+
+        return(
+          <div>
+            <Header />
+            <Header name="dion"/>
+            <h2>My hobby is:</h2>
+            <ul>
+              {hobbys.map((hobby) => (<li key={hobby}>{hobby}</li>))}
+            </ul>
+            <h2>Skor : {likes}</h2>
+            <button onClick={handleClickPlus}>+</button>
+            <button onClick={handleClickMin}>-</button>
+            <br />
+            <button onClick={handleClickReset}>Reset!</button>
+          </div>
+          
+          );
       }
 
       const container = document.getElementById('root');
